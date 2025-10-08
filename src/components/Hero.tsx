@@ -1,4 +1,4 @@
-import { TrendingDown, Shield, Zap, Globe } from 'lucide-react';
+import { TrendingDown, Shield, Zap } from 'lucide-react';
 
 export function Hero() {
   const scrollToCompare = () => {
@@ -21,7 +21,7 @@ export function Hero() {
           </h1>
           
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Find the perfect Bitcoin-backed loan in seconds. Compare rates, terms, and features across 9 leading platforms.
+            Find the perfect Bitcoin-backed loan in seconds. Compare rates, terms, and features across 18 leading platforms.
           </p>
           
           <button
@@ -33,7 +33,7 @@ export function Hero() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 max-w-4xl mx-auto">
             <div className="stat-card rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-primary">9</div>
+              <div className="text-3xl font-bold text-primary">18</div>
               <div className="text-sm text-muted-foreground mt-2">Platforms</div>
             </div>
             

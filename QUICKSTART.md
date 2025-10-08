@@ -17,7 +17,7 @@ That's it! Open http://localhost:5173 in your browser.
 
 ## What You'll See
 
-1. **Hero Section** - Bitcoin orange branding with "21compare"
+1. **Hero Section** - Bitcoin orange branding with "check21"
 2. **Platform Finder** - 5-question form to find your match
 3. **Results** - Top 3 personalized platform recommendations
 4. **Platform Grid** - Browse all 9 platforms

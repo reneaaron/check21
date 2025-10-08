@@ -2,11 +2,43 @@ import type { Platform } from '@/data/platforms';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Trophy, ExternalLink } from 'lucide-react';
+import { Trophy, ExternalLink, Star } from 'lucide-react';
 
 interface ResultsProps {
   matches: Platform[];
   onShowDetails: (platform: Platform) => void;
+}
+
+// Convert 0-10 score to 1-5 stars
+function getStarRating(score: number): number {
+  return Math.round((score / 10) * 5 * 2) / 2; // Round to nearest 0.5
+}
+
+// Render star rating component
+function StarRating({ score }: { score: number }) {
+  const rating = getStarRating(score);
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
+  const emptyStars = Math.max(0, 5 - Math.ceil(rating));
+
+  return (
+    <div className="flex items-center gap-1">
+      {[...Array(fullStars)].map((_, i) => (
+        <Star key={`full-${i}`} className="h-4 w-4 fill-primary text-primary" />
+      ))}
+      {hasHalfStar && (
+        <div className="relative">
+          <Star className="h-4 w-4 text-muted-foreground" />
+          <div className="absolute inset-0 overflow-hidden" style={{ width: '50%' }}>
+            <Star className="h-4 w-4 fill-primary text-primary" />
+          </div>
+        </div>
+      )}
+      {[...Array(emptyStars)].map((_, i) => (
+        <Star key={`empty-${i}`} className="h-4 w-4 text-muted-foreground" />
+      ))}
+    </div>
+  );
 }
 
 export function Results({ matches, onShowDetails }: ResultsProps) {
@@ -21,79 +53,87 @@ export function Results({ matches, onShowDetails }: ResultsProps) {
         <p className="text-muted-foreground mt-2">Based on your preferences, here are the best platforms for you</p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {matches.map((platform, index) => (
-          <Card key={platform.id} className={`platform-card ${index === 0 ? 'border-primary' : ''}`}>
-            <CardContent className="p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    {index === 0 && (
-                      <Badge className="bg-primary/10 text-primary border-primary/20">
-                        <Trophy className="h-3 w-3 mr-1" />
-                        BEST MATCH
-                      </Badge>
-                    )}
-                    <img
-                      src={platform.logo}
-                      alt={`${platform.name} logo`}
-                      className="w-6 h-6 rounded object-contain"
-                    />
-                    <h4 className="text-xl font-bold">{platform.name}</h4>
-                    <Badge variant="outline" className={
-                      platform.type === 'cefi'
-                        ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-                        : 'bg-purple-500/10 text-purple-400 border-purple-500/20'
-                    }>
-                      {platform.type.toUpperCase()}
-                    </Badge>
-                  </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                    <div>
-                      <div className="text-xs text-muted-foreground">APR</div>
-                      <div className="text-lg font-bold text-primary">{platform.apr}</div>
+          <Card
+            key={platform.id}
+            className={`platform-card cursor-pointer transition-all hover:shadow-lg hover:border-primary/50 ${index === 0 ? 'border-primary border-2' : ''}`}
+            onClick={() => onShowDetails(platform)}
+          >
+            <CardContent className="p-8 relative">
+              {/* Match Rating - Top Right */}
+              {platform.score && (
+                <div className="absolute top-6 right-6 flex flex-col items-end gap-1.5">
+                  {index === 0 ? (
+                    <div className="flex items-center gap-1.5 text-primary font-semibold text-sm">
+                      <Trophy className="h-4 w-4" />
+                      BEST MATCH
                     </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground">LTV</div>
-                      <div className="text-lg font-bold">{platform.ltv}</div>
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground">Funding</div>
-                      <div className="text-sm font-semibold">{platform.fundingTime}</div>
-                    </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground">Min Loan</div>
-                      <div className="text-sm font-semibold">${platform.minLoan.toLocaleString()}</div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {platform.features.slice(0, 3).map((feature, idx) => (
-                      <Badge key={idx} variant="secondary" className="text-xs">
-                        {feature}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  {platform.score && (
-                    <div className="text-sm text-muted-foreground">
-                      Match score: <span className="font-semibold text-primary">{platform.score.toFixed(1)}/10</span>
-                    </div>
+                  ) : (
+                    <span className="text-xs font-medium text-muted-foreground">Match Rating</span>
                   )}
+                  <StarRating score={platform.score} />
+                </div>
+              )}
+
+              {/* Main Content */}
+              <div className="pr-32">
+                <div className="flex items-center gap-3 mb-4">
+                  <img
+                    src={platform.logo}
+                    alt={`${platform.name} logo`}
+                    className="w-8 h-8 rounded object-contain"
+                  />
+                  <h4 className="text-2xl font-bold">{platform.name}</h4>
+                  <Badge variant="outline" className={
+                    platform.type === 'cefi'
+                      ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                      : 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+                  }>
+                    {platform.type.toUpperCase()}
+                  </Badge>
                 </div>
 
-                <div className="flex flex-col gap-2">
-                  <Button onClick={() => onShowDetails(platform)} variant="outline" size="sm">
-                    Details
-                  </Button>
-                  <Button asChild size="sm">
-                    <a href={platform.url} target="_blank" rel="noopener noreferrer">
-                      <ExternalLink className="h-4 w-4 mr-2" />
-                      Visit
-                    </a>
-                  </Button>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+                  <div>
+                    <div className="text-xs text-muted-foreground">APR</div>
+                    <div className="text-lg font-bold text-primary">{platform.apr}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-muted-foreground">LTV</div>
+                    <div className="text-lg font-bold">{platform.ltv}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-muted-foreground">Funding</div>
+                    <div className="text-sm font-semibold">{platform.fundingTime}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-muted-foreground">Min Loan</div>
+                    <div className="text-sm font-semibold">${platform.minLoan.toLocaleString()}</div>
+                  </div>
                 </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {platform.features.slice(0, 3).map((feature, idx) => (
+                    <Badge key={idx} variant="secondary" className="text-xs">
+                      {feature}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Visit Button - Bottom Right */}
+              <div className="absolute bottom-6 right-6">
+                <Button
+                  asChild
+                  size="sm"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <a href={platform.url} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-4 w-4 mr-2" />
+                    Visit Site
+                  </a>
+                </Button>
               </div>
             </CardContent>
           </Card>

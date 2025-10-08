@@ -153,4 +153,4 @@ Built with modern web technologies and inspired by professional comparison platf
 
 ---
 
-**21compare** - Compare Bitcoin Lending Platforms
+**check21** - Compare Bitcoin Lending Platforms

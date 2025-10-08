@@ -133,15 +133,20 @@
   
   .radio-card {
     cursor: pointer;
-    transition: all 0.2s ease;
-    @apply border bg-card hover:bg-accent/50;
+    transition: all 0.15s ease;
+    @apply border bg-card hover:bg-accent/50 hover:border-primary/50;
   }
   
   .radio-card.selected {
-    @apply border-primary bg-primary/10;
+    @apply border-primary bg-primary/5;
   }
   
   .stat-card {
     @apply bg-card border shadow-sm;
+    transition: all 0.2s ease;
+  }
+  
+  .stat-card:hover {
+    @apply shadow-md;
   }
 }
