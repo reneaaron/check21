@@ -17,8 +17,8 @@ export function Navigation() {
         <div className="flex items-center space-x-2">
           <Bitcoin className="h-8 w-8 text-primary" />
           <span className="text-2xl font-bold">
-            <span className="text-foreground">21</span>
-            <span className="text-primary">compare</span>
+            <span className="text-foreground">check</span>
+            <span className="text-primary">21</span>
           </span>
         </div>
         

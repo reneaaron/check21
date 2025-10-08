@@ -50,8 +50,8 @@ function App() {
         <div className="container mx-auto px-6">
           <div className="text-center">
             <div className="text-2xl font-bold mb-4">
+              <span className="text-primary">check</span>
               <span className="text-foreground">21</span>
-              <span className="text-primary">compare</span>
             </div>
             <p className="text-sm text-muted-foreground mb-6">
               Professional Bitcoin lending platform comparison
