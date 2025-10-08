@@ -4,6 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -77,36 +79,36 @@
 }
 
 .dark {
-  --background: oklch(0.04 0 0); /* #0a0a0a */
+  --background: oklch(0.09 0 0); /* Slightly lighter dark background */
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.08 0 0); /* #141414 */
+  --card: oklch(0.16 0 0); /* Much lighter card background */
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.08 0 0);
+  --popover: oklch(0.16 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.73 0.148 52); /* Bitcoin orange #f7931a */
   --primary-foreground: oklch(0 0 0); /* Black text on orange */
-  --secondary: oklch(0.15 0 0);
+  --secondary: oklch(0.25 0 0); /* Lighter secondary */
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.15 0 0);
-  --muted-foreground: oklch(0.556 0 0); /* #888888 */
-  --accent: oklch(0.15 0 0);
+  --muted: oklch(0.25 0 0); /* Lighter muted */
+  --muted-foreground: oklch(0.65 0 0); /* Lighter muted text */
+  --accent: oklch(0.25 0 0); /* Lighter accent */
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.12 0 0); /* #1f1f1f */
-  --input: oklch(0.12 0 0);
+  --border: oklch(0.25 0 0); /* Much lighter border */
+  --input: oklch(0.16 0 0); /* Lighter input background */
   --ring: oklch(0.73 0.148 52); /* Bitcoin orange ring */
   --chart-1: oklch(0.73 0.148 52);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.08 0 0);
+  --sidebar: oklch(0.16 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.73 0.148 52);
   --sidebar-primary-foreground: oklch(0 0 0);
-  --sidebar-accent: oklch(0.15 0 0);
+  --sidebar-accent: oklch(0.25 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.12 0 0);
+  --sidebar-border: oklch(0.25 0 0);
   --sidebar-ring: oklch(0.73 0.148 52);
 }
 
@@ -116,6 +118,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', var(--font-sans);
   }
 }
 
@@ -131,17 +134,14 @@
   .radio-card {
     cursor: pointer;
     transition: all 0.2s ease;
-    border: 1px solid oklch(0.12 0 0);
-    background: oklch(0.08 0 0);
+    @apply border bg-card hover:bg-accent/50;
   }
   
   .radio-card.selected {
-    border-color: oklch(0.73 0.148 52);
-    background: oklch(0.73 0.148 52 / 0.05);
+    @apply border-primary bg-primary/10;
   }
   
   .stat-card {
-    background: oklch(0.08 0 0);
-    border: 1px solid oklch(0.12 0 0);
+    @apply bg-card border shadow-sm;
   }
 }

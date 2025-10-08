@@ -16,13 +16,20 @@ export function PlatformModal({ platform, onClose }: PlatformModalProps) {
     <Dialog open={!!platform} onOpenChange={onClose}>
       <DialogContent onClose={onClose} className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold mb-2">
-            {platform.name}
-          </DialogTitle>
+          <div className="flex items-center gap-3 mb-2">
+            <img
+              src={platform.logo}
+              alt={`${platform.name} logo`}
+              className="w-10 h-10 rounded-lg object-contain"
+            />
+            <DialogTitle className="text-2xl font-bold">
+              {platform.name}
+            </DialogTitle>
+          </div>
           <div className="flex items-center gap-2 flex-wrap">
             <Badge variant="outline" className={
-              platform.type === 'cefi' 
-                ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' 
+              platform.type === 'cefi'
+                ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
                 : 'bg-purple-500/10 text-purple-400 border-purple-500/20'
             }>
               {platform.type.toUpperCase()}

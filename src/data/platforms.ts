@@ -2,6 +2,7 @@ export interface Platform {
   id: string;
   name: string;
   type: 'cefi' | 'defi';
+  logo: string;
   apr: string;
   aprMin: number;
   aprMax: number;
@@ -32,6 +33,7 @@ export const platforms: Platform[] = [
     id: 'strike',
     name: 'Strike',
     type: 'cefi',
+    logo: '/src/assets/logos/strike.svg',
     apr: 'Variable',
     aprMin: 8,
     aprMax: 12,
@@ -59,6 +61,7 @@ export const platforms: Platform[] = [
     id: 'ledn',
     name: 'Ledn',
     type: 'cefi',
+    logo: '/src/assets/logos/ledn.svg',
     apr: '12.4%',
     aprMin: 12.4,
     aprMax: 12.4,
@@ -86,6 +89,7 @@ export const platforms: Platform[] = [
     id: 'unchained',
     name: 'Unchained Capital',
     type: 'cefi',
+    logo: '/src/assets/logos/unchained.svg',
     apr: '9.5-13%',
     aprMin: 9.5,
     aprMax: 13,
@@ -113,6 +117,7 @@ export const platforms: Platform[] = [
     id: 'river',
     name: 'River Financial',
     type: 'cefi',
+    logo: '/src/assets/logos/river.svg',
     apr: '8.5%',
     aprMin: 8.5,
     aprMax: 8.5,
@@ -140,6 +145,7 @@ export const platforms: Platform[] = [
     id: 'nexo',
     name: 'Nexo',
     type: 'cefi',
+    logo: '/src/assets/logos/nexo.svg',
     apr: '13.9%',
     aprMin: 13.9,
     aprMax: 13.9,
@@ -167,6 +173,7 @@ export const platforms: Platform[] = [
     id: 'aave',
     name: 'Aave',
     type: 'defi',
+    logo: '/src/assets/logos/aave.svg',
     apr: '1-8%',
     aprMin: 1,
     aprMax: 8,
@@ -194,6 +201,7 @@ export const platforms: Platform[] = [
     id: 'compound',
     name: 'Compound',
     type: 'defi',
+    logo: '/src/assets/logos/compound.svg',
     apr: '2-9%',
     aprMin: 2,
     aprMax: 9,
@@ -221,6 +229,7 @@ export const platforms: Platform[] = [
     id: 'makerdao',
     name: 'MakerDAO',
     type: 'defi',
+    logo: '/src/assets/logos/makerdao.svg',
     apr: '5.5%',
     aprMin: 5.5,
     aprMax: 5.5,
@@ -248,6 +257,7 @@ export const platforms: Platform[] = [
     id: 'sovryn',
     name: 'Sovryn',
     type: 'defi',
+    logo: '/src/assets/logos/sovryn.svg',
     apr: '0.5-3%',
     aprMin: 0.5,
     aprMax: 3,

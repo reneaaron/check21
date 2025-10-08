@@ -22,10 +22,17 @@ export function PlatformGrid({ platforms, onShowDetails }: PlatformGridProps) {
             <Card key={platform.id} className="platform-card flex flex-col">
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
-                  <CardTitle className="text-xl">{platform.name}</CardTitle>
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={platform.logo}
+                      alt={`${platform.name} logo`}
+                      className="w-8 h-8 rounded-md object-contain"
+                    />
+                    <CardTitle className="text-xl">{platform.name}</CardTitle>
+                  </div>
                   <Badge variant="outline" className={
-                    platform.type === 'cefi' 
-                      ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' 
+                    platform.type === 'cefi'
+                      ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
                       : 'bg-purple-500/10 text-purple-400 border-purple-500/20'
                   }>
                     {platform.type.toUpperCase()}

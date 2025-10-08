@@ -34,10 +34,15 @@ export function Results({ matches, onShowDetails }: ResultsProps) {
                         BEST MATCH
                       </Badge>
                     )}
+                    <img
+                      src={platform.logo}
+                      alt={`${platform.name} logo`}
+                      className="w-6 h-6 rounded object-contain"
+                    />
                     <h4 className="text-xl font-bold">{platform.name}</h4>
                     <Badge variant="outline" className={
-                      platform.type === 'cefi' 
-                        ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' 
+                      platform.type === 'cefi'
+                        ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
                         : 'bg-purple-500/10 text-purple-400 border-purple-500/20'
                     }>
                       {platform.type.toUpperCase()}
