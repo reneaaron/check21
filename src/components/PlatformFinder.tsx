@@ -46,7 +46,7 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
             {/* 1. Loan Amount */}
             <div className="space-y-3">
               <Label htmlFor="loanAmount" className="text-base font-medium flex items-center gap-2">
-                <DollarSign className="h-4 w-4 text-muted-foreground" />
+                <DollarSign className="h-4 w-4 text-green-600" />
                 Loan Amount
               </Label>
               <div className="relative">
@@ -67,7 +67,7 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
             {/* 2. Location */}
             <div className="space-y-3">
               <Label htmlFor="location" className="text-base font-medium flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
+                <MapPin className="h-4 w-4 text-blue-600" />
                 Location
               </Label>
               <Select
@@ -86,7 +86,10 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
 
             {/* 3. Payout Method */}
             <div className="space-y-3">
-              <Label className="text-base font-medium">Payout Method</Label>
+              <Label className="text-base font-medium flex items-center gap-2">
+                <Building2 className="h-4 w-4 text-purple-600" />
+                Payout Method
+              </Label>
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { value: 'fiat' as const, icon: Building2, label: 'Bank Transfer', desc: 'Fiat currency' },
@@ -103,7 +106,15 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
                       }`}
                       onClick={() => setPayout(option.value)}
                     >
-                      <Icon className="h-5 w-5 mx-auto mb-2 text-muted-foreground" />
+                      <Icon className={`h-5 w-5 mx-auto mb-2 ${
+                        payout === option.value
+                          ? 'text-primary'
+                          : option.value === 'fiat'
+                            ? 'text-blue-500'
+                            : option.value === 'stablecoin'
+                              ? 'text-green-500'
+                              : 'text-orange-500'
+                      }`} />
                       <div className="font-medium text-sm">{option.label}</div>
                       <div className="text-xs text-muted-foreground mt-1">{option.desc}</div>
                     </button>
@@ -114,7 +125,10 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
 
             {/* 4. Speed */}
             <div className="space-y-3">
-              <Label className="text-base font-medium">Funding Speed</Label>
+              <Label className="text-base font-medium flex items-center gap-2">
+                <Zap className="h-4 w-4 text-yellow-600" />
+                Funding Speed
+              </Label>
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { value: 'instant' as const, icon: Zap, label: 'Instant', desc: 'Within minutes' },
@@ -131,7 +145,15 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
                       }`}
                       onClick={() => setSpeed(option.value)}
                     >
-                      <Icon className="h-5 w-5 mx-auto mb-2 text-muted-foreground" />
+                      <Icon className={`h-5 w-5 mx-auto mb-2 ${
+                        speed === option.value
+                          ? 'text-primary'
+                          : option.value === 'instant'
+                            ? 'text-yellow-500'
+                            : option.value === 'sameday'
+                              ? 'text-orange-500'
+                              : 'text-blue-500'
+                      }`} />
                       <div className="font-medium text-sm">{option.label}</div>
                       <div className="text-xs text-muted-foreground mt-1">{option.desc}</div>
                     </button>
@@ -142,7 +164,10 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
 
             {/* 5. Priority */}
             <div className="space-y-3">
-              <Label className="text-base font-medium">Priority</Label>
+              <Label className="text-base font-medium flex items-center gap-2">
+                <TrendingDown className="h-4 w-4 text-red-600" />
+                Priority
+              </Label>
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { value: 'rate' as const, icon: TrendingDown, label: 'Best Rate', desc: 'Lowest APR' },
@@ -159,7 +184,15 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
                       }`}
                       onClick={() => setPriority(option.value)}
                     >
-                      <Icon className="h-5 w-5 mx-auto mb-2 text-muted-foreground" />
+                      <Icon className={`h-5 w-5 mx-auto mb-2 ${
+                        priority === option.value
+                          ? 'text-primary'
+                          : option.value === 'rate'
+                            ? 'text-red-500'
+                            : option.value === 'security'
+                              ? 'text-green-500'
+                              : 'text-purple-500'
+                      }`} />
                       <div className="font-medium text-sm">{option.label}</div>
                       <div className="text-xs text-muted-foreground mt-1">{option.desc}</div>
                     </button>

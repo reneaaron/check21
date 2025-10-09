@@ -36,8 +36,8 @@ export function PlatformGrid({ platforms, onShowDetails }: PlatformGridProps) {
                   </div>
                   <Badge variant="outline" className={
                     platform.type === 'cefi'
-                      ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-                      : 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+                      ? 'bg-primary/10 text-primary border-primary/20'
+                      : 'bg-secondary/10 text-secondary-foreground border-secondary/20'
                   }>
                     {platform.type.toUpperCase()}
                   </Badge>
@@ -60,19 +60,19 @@ export function PlatformGrid({ platforms, onShowDetails }: PlatformGridProps) {
                 {/* Quick highlights */}
                 <div className="flex flex-wrap gap-2">
                   {platform.fundingTime === 'Instant' && (
-                    <Badge variant="secondary" className="bg-green-500/10 text-green-600 border-green-500/20 text-xs flex items-center gap-1">
+                    <Badge variant="secondary" className="bg-accent/10 text-accent-foreground border-accent/20 text-xs flex items-center gap-1">
                       <Zap className="h-3 w-3" />
                       Instant Funding
                     </Badge>
                   )}
                   {!platform.kyc && (
-                    <Badge variant="secondary" className="bg-green-500/10 text-green-600 border-green-500/20 text-xs flex items-center gap-1">
+                    <Badge variant="secondary" className="bg-accent/10 text-accent-foreground border-accent/20 text-xs flex items-center gap-1">
                       <ShieldCheck className="h-3 w-3" />
                       No KYC
                     </Badge>
                   )}
                   {platform.minLoan === 0 && (
-                    <Badge variant="secondary" className="bg-blue-500/10 text-blue-600 border-blue-500/20 text-xs flex items-center gap-1">
+                    <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20 text-xs flex items-center gap-1">
                       <DollarSign className="h-3 w-3" />
                       No Minimum
                     </Badge>

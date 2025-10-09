@@ -29,8 +29,8 @@ export function PlatformModal({ platform, onClose }: PlatformModalProps) {
           <div className="flex items-center gap-2 flex-wrap">
             <Badge variant="outline" className={
               platform.type === 'cefi'
-                ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-                : 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+                ? 'bg-primary/10 text-primary border-primary/20'
+                : 'bg-secondary/10 text-secondary-foreground border-secondary/20'
             }>
               {platform.type.toUpperCase()}
             </Badge>
@@ -39,7 +39,7 @@ export function PlatformModal({ platform, onClose }: PlatformModalProps) {
             {!platform.kyc && (
               <>
                 <span className="text-muted-foreground">•</span>
-                <Badge variant="secondary" className="bg-green-500/10 text-green-400 border-green-500/20">
+                <Badge variant="secondary" className="bg-accent/10 text-accent-foreground border-accent/20">
                   No KYC
                 </Badge>
               </>
@@ -106,13 +106,13 @@ export function PlatformModal({ platform, onClose }: PlatformModalProps) {
         <div className="grid md:grid-cols-2 gap-6 mb-6">
           <div>
             <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
-              <Check className="h-4 w-4 text-green-400" />
+              <Check className="h-4 w-4 text-accent-foreground" />
               Pros
             </h4>
             <ul className="space-y-2">
               {platform.pros.map((pro, idx) => (
                 <li key={idx} className="text-sm flex items-start gap-2">
-                  <span className="text-green-400 mt-0.5">✓</span>
+                  <span className="text-accent-foreground mt-0.5">✓</span>
                   <span>{pro}</span>
                 </li>
               ))}

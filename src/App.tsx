@@ -22,7 +22,7 @@ function App() {
     
     // Scroll to results after a brief delay
     setTimeout(() => {
-      const element = document.getElementById('compare');
+      const element = document.getElementById('results');
       if (element) {
         const yOffset = -80;
         const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -32,13 +32,13 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen dark">
+    <div className="min-h-screen">
       <Navigation />
       <Hero />
       <div id="compare">
         <PlatformFinder onMatch={handleMatch} />
         {showResults && matches.length > 0 && (
-          <div className="container mx-auto max-w-4xl px-6 pb-16">
+          <div id="results" className="container mx-auto max-w-4xl px-6 pb-16">
             <Results matches={matches} onShowDetails={setSelectedPlatform} />
           </div>
         )}

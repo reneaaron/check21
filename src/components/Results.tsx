@@ -87,8 +87,8 @@ export function Results({ matches, onShowDetails }: ResultsProps) {
                   <h4 className="text-2xl font-bold">{platform.name}</h4>
                   <Badge variant="outline" className={
                     platform.type === 'cefi'
-                      ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
-                      : 'bg-purple-500/10 text-purple-400 border-purple-500/20'
+                      ? 'bg-primary/10 text-primary border-primary/20'
+                      : 'bg-secondary/10 text-secondary-foreground border-secondary/20'
                   }>
                     {platform.type.toUpperCase()}
                   </Badge>
