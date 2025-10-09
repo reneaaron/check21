@@ -130,7 +130,7 @@ export function Results({ matches, onShowDetails }: ResultsProps) {
                   onClick={(e) => e.stopPropagation()}
                 >
                   <a href={platform.url} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4 mr-2" />
+                    <ExternalLink />
                     Visit Site
                   </a>
                 </Button>
