@@ -532,5 +532,33 @@ export const platforms: Platform[] = [
     reputation: 6.5,
     url: 'https://nebeus.com',
     priority: 'simplicity'
+  },
+  {
+    id: 'figure',
+    name: 'Figure',
+    type: 'cefi',
+    logo: '/src/assets/logos/figure.svg',
+    apr: '9-12.6%',
+    aprMin: 9,
+    aprMax: 12.6,
+    ltv: '75%',
+    minLoan: 5000,
+    maxLoan: 'TBD',
+    fundingTime: 'Same day',
+    fundingDays: 0.5,
+    payout: 'fiat',
+    payoutMethods: ['USD', 'Crypto via Figure Markets'],
+    withdrawalTime: '3 days (wire), 3 weeks (ACH)',
+    geography: ['us', 'other'],
+    geoDisplay: 'US (40 states) + International',
+    kyc: true,
+    custody: 'Decentralized MPC custody',
+    monthlyPayments: false,
+    features: ['Supports BTC, ETH, SOL', 'Decentralized custody', 'No credit score needed', 'Defer interest option'],
+    pros: ['Multi-asset support', 'Decentralized custody', 'No credit check', 'Flexible payments'],
+    cons: ['Limited US states', 'Higher APR at 75% LTV', '1% origination fee', 'Short 1-year term'],
+    reputation: 8.0,
+    url: 'https://www.figure.com',
+    priority: 'security'
   }
 ];

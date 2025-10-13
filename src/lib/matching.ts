@@ -67,7 +67,7 @@ export function matchPlatforms(formData: FormData, allPlatforms: Platform[]): Pl
     return { ...platform, score };
   });
 
-  // Sort by score (highest first) and return top 3
+  // Sort by score (highest first) and return top 5
   matches.sort((a, b) => (b.score || 0) - (a.score || 0));
-  return matches.slice(0, 3);
+  return matches.slice(0, 5);
 }

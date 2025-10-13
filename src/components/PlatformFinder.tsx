@@ -202,8 +202,12 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
             </div>
 
             {/* Submit */}
-            <Button type="submit" className="w-full h-11 mt-8">
-              Show Matches
+            <Button
+              type="submit"
+              className="w-full h-12 mt-8 text-base font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
+              size="lg"
+            >
+              Compare Loan Options
             </Button>
           </form>
         </div>
