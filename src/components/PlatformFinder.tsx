@@ -4,15 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
-import { DollarSign, MapPin, Building2, Coins, Repeat, Zap, Rocket, Calendar, TrendingDown, Shield, Sparkles } from 'lucide-react';
+import { DollarSign, MapPin, Building2, Coins, Repeat, Zap, Rocket, Calendar, TrendingDown, Shield, Sparkles, Loader2 } from 'lucide-react';
 import type { FormData } from '@/lib/matching';
 import type { Platform } from '@/data/platforms';
 
 interface PlatformFinderProps {
   onMatch: (matches: Platform[], formData: FormData) => void;
+  isLoading?: boolean;
 }
 
-export function PlatformFinder({ onMatch }: PlatformFinderProps) {
+export function PlatformFinder({ onMatch, isLoading = false }: PlatformFinderProps) {
   const [loanAmount, setLoanAmount] = useState('10000');
   const [location, setLocation] = useState('us');
   const [payout, setPayout] = useState<'fiat' | 'stablecoin' | 'either'>('fiat');
@@ -206,8 +207,16 @@ export function PlatformFinder({ onMatch }: PlatformFinderProps) {
               type="submit"
               className="w-full h-12 mt-8 text-base font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
               size="lg"
+              disabled={isLoading}
             >
-              Compare Loan Options
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Finding Matches...
+                </>
+              ) : (
+                "Compare Loan Options"
+              )}
             </Button>
           </form>
         </div>

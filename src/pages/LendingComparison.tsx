@@ -3,6 +3,7 @@ import { PlatformFinder } from '../components/PlatformFinder';
 import { Results } from '../components/Results';
 import { PlatformGrid } from '../components/PlatformGrid';
 import { PlatformModal } from '../components/PlatformModal';
+import { LastRefreshed } from '../components/LastRefreshed';
 import { platforms } from '../data/platforms';
 import { matchPlatforms } from '../lib/matching';
 import { Badge } from '@/components/ui/badge';
@@ -14,21 +15,30 @@ export function LendingComparison() {
   const [matches, setMatches] = useState<Platform[]>([]);
   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
   const [showResults, setShowResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [lastRefreshed, setLastRefreshed] = useState<Date | null>(null);
 
   const handleMatch = (_: Platform[], formData: FormData) => {
-    const results = matchPlatforms(formData, platforms);
-    setMatches(results);
+    setIsLoading(true);
     setShowResults(true);
     
-    // Scroll to results after a brief delay
+    // Simulate API call with a delay
     setTimeout(() => {
-      const element = document.getElementById('results');
-      if (element) {
-        const yOffset = -80;
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    }, 100);
+      const results = matchPlatforms(formData, platforms);
+      setMatches(results);
+      setIsLoading(false);
+      setLastRefreshed(new Date());
+      
+      // Scroll to results after a brief delay
+      setTimeout(() => {
+        const element = document.getElementById('results');
+        if (element) {
+          const yOffset = -80;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 100);
+    }, 1500); // Simulate network delay
   };
 
   return (
@@ -56,10 +66,24 @@ export function LendingComparison() {
       </div>
 
       <div id="compare">
-        <PlatformFinder onMatch={handleMatch} />
-        {showResults && matches.length > 0 && (
+        <PlatformFinder onMatch={handleMatch} isLoading={isLoading} />
+        {showResults && (
           <div id="results" className="container mx-auto max-w-4xl px-6 pb-16">
-            <Results matches={matches} onShowDetails={setSelectedPlatform} />
+            <div className="text-center mb-8 relative">
+              <h3 className="text-2xl font-bold">Your Top Matches</h3>
+              <p className="text-muted-foreground mt-2">Based on your preferences, here are the best platforms for you</p>
+              
+            </div>
+            {lastRefreshed && (
+                <div className="my-2 flex justify-end">
+                  <LastRefreshed timestamp={lastRefreshed} />
+                </div>
+              )}
+            <Results
+              matches={matches}
+              onShowDetails={setSelectedPlatform}
+              isLoading={isLoading}
+            />
           </div>
         )}
       </div>

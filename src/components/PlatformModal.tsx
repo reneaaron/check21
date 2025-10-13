@@ -49,21 +49,21 @@ export function PlatformModal({ platform, onClose }: PlatformModalProps) {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-4 gap-4 my-6">
-          <div className="stat-card rounded-lg p-4">
+          <div className="stat-card rounded-lg p-4 border bg-card/50">
             <div className="text-xs text-muted-foreground mb-1">APR</div>
             <div className="text-xl font-bold text-primary">{platform.apr}</div>
           </div>
-          <div className="stat-card rounded-lg p-4">
+          <div className="stat-card rounded-lg p-4 border bg-card/50">
             <div className="text-xs text-muted-foreground mb-1">LTV</div>
             <div className="text-xl font-bold">{platform.ltv}</div>
           </div>
-          <div className="stat-card rounded-lg p-4">
+          <div className="stat-card rounded-lg p-4 border bg-card/50">
             <div className="text-xs text-muted-foreground mb-1">Funding</div>
-            <div className="text-sm font-bold">{platform.fundingTime}</div>
+            <div className="text-xl font-bold">{platform.fundingTime}</div>
           </div>
-          <div className="stat-card rounded-lg p-4">
+          <div className="stat-card rounded-lg p-4 border bg-card/50">
             <div className="text-xs text-muted-foreground mb-1">Min Loan</div>
-            <div className="text-sm font-bold">
+            <div className="text-xl font-bold">
               {platform.minLoan === 0 ? 'None' : `$${platform.minLoan.toLocaleString()}`}
             </div>
           </div>
