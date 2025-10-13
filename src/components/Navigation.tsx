@@ -1,7 +1,7 @@
-import { Bitcoin, Zap, ArrowRightLeft, Shield } from 'lucide-react';
+import { Bitcoin, Zap, ArrowRightLeft, Shield, DollarSign, ShoppingCart } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 
 export function Navigation() {
   const location = useLocation();
@@ -26,31 +26,66 @@ export function Navigation() {
               location.pathname === '/lending' ? 'text-foreground' : 'text-muted-foreground'
             }`}
           >
+            <DollarSign className="h-3.5 w-3.5 mr-1.5" />
             Lending
           </Link>
           
-          <div className="text-sm font-medium text-muted-foreground/50 flex items-center cursor-not-allowed">
-            <Zap className="h-3.5 w-3.5 mr-1.5 text-muted-foreground/50" />
-            Lightning
-            <Badge variant="outline" className="ml-1.5 text-[10px] py-0 h-4 px-1">
-              Soon™
-            </Badge>
-          </div>
-          
-          <div className="text-sm font-medium text-muted-foreground/50 flex items-center cursor-not-allowed">
-            <Shield className="h-3.5 w-3.5 mr-1.5 text-muted-foreground/50" />
-            Self-Custody
-            <Badge variant="outline" className="ml-1.5 text-[10px] py-0 h-4 px-1">
-              Soon™
-            </Badge>
-          </div>
-          
-          <div className="text-sm font-medium text-muted-foreground/50 flex items-center cursor-not-allowed">
-            <ArrowRightLeft className="h-3.5 w-3.5 mr-1.5 text-muted-foreground/50" />
-            Swaps
-            <Badge variant="outline" className="ml-1.5 text-[10px] py-0 h-4 px-1">
-              Soon™
-            </Badge>
+          <div className="flex items-center gap-4">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="text-sm font-medium text-muted-foreground/60 flex items-center cursor-not-allowed">
+                    <Zap className="h-3.5 w-3.5 mr-1.5 text-muted-foreground/60" />
+                    Lightning Channels
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p>Coming Soon</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="text-sm font-medium text-muted-foreground/60 flex items-center cursor-not-allowed">
+                    <ShoppingCart className="h-3.5 w-3.5 mr-1.5 text-muted-foreground/60" />
+                    Buy Bitcoin
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p>Coming Soon</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="text-sm font-medium text-muted-foreground/60 flex items-center cursor-not-allowed">
+                    <Shield className="h-3.5 w-3.5 mr-1.5 text-muted-foreground/60" />
+                    Insurances
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p>Coming Soon</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="text-sm font-medium text-muted-foreground/60 flex items-center cursor-not-allowed">
+                    <ArrowRightLeft className="h-3.5 w-3.5 mr-1.5 text-muted-foreground/60" />
+                    Swaps
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">
+                  <p>Coming Soon</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           
           <Link to="/lending">
