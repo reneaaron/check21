@@ -1,0 +1,11 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="12" fill="#FF6B35"/>
+  <g transform="translate(16, 16)">
+    <!-- YouHodler Y logo -->
+    <path d="M8 4L16 16L24 4" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="16" y1="16" x2="16" y2="28" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <!-- Accent elements -->
+    <circle cx="26" cy="6" r="2" fill="white" opacity="0.8"/>
+    <circle cx="6" cy="6" r="1.5" fill="white" opacity="0.6"/>
+  </g>
+</svg>
