@@ -560,5 +560,33 @@ export const platforms: Platform[] = [
     reputation: 8.0,
     url: 'https://www.figure.com',
     priority: 'security'
+  },
+  {
+    id: 'firefish',
+    name: 'Firefish',
+    type: 'defi',
+    logo: '/src/assets/logos/firefish.png',
+    apr: 'Variable',
+    aprMin: 4,
+    aprMax: 15,
+    ltv: '50%',
+    minLoan: 0,
+    maxLoan: 'Negotiable',
+    fundingTime: '1-3 days',
+    fundingDays: 2,
+    payout: 'fiat',
+    payoutMethods: ['EUR', 'GBP', 'USD', 'CHF', 'Stablecoins'],
+    withdrawalTime: '1-3 days',
+    geography: ['europe', 'us', 'other'],
+    geoDisplay: 'EU, US, Global (varies by country)',
+    kyc: true,
+    custody: 'Non-custodial (smart contract)',
+    monthlyPayments: false,
+    features: ['P2P marketplace', 'Bitcoin smart contracts', 'Open source protocol', 'Standard & instant loans', 'Non-custodial', 'Price competition'],
+    pros: ['Non-custodial security', 'Open source', 'P2P marketplace', 'Transparent matching', 'Bitcoin-native', '1.5% origination fee only'],
+    cons: ['KYC required', 'P2P matching time', 'Limited fiat currencies', 'Newer platform', 'Lower LTV (50%)'],
+    reputation: 7.5,
+    url: 'https://firefish.io',
+    priority: 'security'
   }
 ];

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
-import { DollarSign, MapPin, Building2, Coins, Repeat, Zap, Rocket, Calendar, TrendingDown, Shield, Sparkles, Loader2 } from 'lucide-react';
+import { DollarSign, MapPin, Building2, Coins, Repeat, Zap, Rocket, Calendar, TrendingDown, Shield, Sparkles, Loader2, UserX } from 'lucide-react';
 import type { FormData } from '@/lib/matching';
 import type { Platform } from '@/data/platforms';
 
@@ -18,7 +18,12 @@ export function PlatformFinder({ onMatch, isLoading = false }: PlatformFinderPro
   const [location, setLocation] = useState('us');
   const [payout, setPayout] = useState<'fiat' | 'stablecoin' | 'either'>('fiat');
   const [speed, setSpeed] = useState<'instant' | 'sameday' | 'fewdays' | 'noturgent'>('fewdays');
-  const [priority, setPriority] = useState<'rate' | 'security' | 'simplicity'>('rate');
+  const [priorities, setPriorities] = useState({
+    rate: true,
+    security: false,
+    simplicity: false,
+    noKyc: false
+  });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -27,9 +32,16 @@ export function PlatformFinder({ onMatch, isLoading = false }: PlatformFinderPro
       location,
       payout,
       speed,
-      priority,
+      priorities
     };
     onMatch([], formData);
+  };
+
+  const togglePriority = (key: 'rate' | 'security' | 'simplicity' | 'noKyc') => {
+    setPriorities(prev => ({
+      ...prev,
+      [key]: !prev[key]
+    }));
   };
 
   return (
@@ -163,36 +175,40 @@ export function PlatformFinder({ onMatch, isLoading = false }: PlatformFinderPro
               </div>
             </div>
 
-            {/* 5. Priority */}
+            {/* 5. Priorities */}
             <div className="space-y-3">
               <Label className="text-base font-medium flex items-center gap-2">
                 <TrendingDown className="h-4 w-4 text-red-600" />
-                Priority
+                Priorities (Select Multiple)
               </Label>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 {[
-                  { value: 'rate' as const, icon: TrendingDown, label: 'Best Rate', desc: 'Lowest APR' },
-                  { value: 'security' as const, icon: Shield, label: 'Security', desc: 'Self-custody' },
-                  { value: 'simplicity' as const, icon: Sparkles, label: 'Simplicity', desc: 'Easy process' },
+                  { key: 'rate' as const, icon: TrendingDown, label: 'Best Rate', desc: 'Lowest APR' },
+                  { key: 'security' as const, icon: Shield, label: 'Key Control', desc: 'Non-custodial options' },
+                  { key: 'simplicity' as const, icon: Sparkles, label: 'Simplicity', desc: 'Easy process' },
+                  { key: 'noKyc' as const, icon: UserX, label: 'No KYC', desc: 'No identity verification' },
                 ].map((option) => {
                   const Icon = option.icon;
+                  const isSelected = priorities[option.key];
                   return (
                     <button
-                      key={option.value}
+                      key={option.key}
                       type="button"
                       className={`radio-card rounded-lg p-4 text-center ${
-                        priority === option.value ? 'selected' : ''
+                        isSelected ? 'selected' : ''
                       }`}
-                      onClick={() => setPriority(option.value)}
+                      onClick={() => togglePriority(option.key)}
                     >
                       <Icon className={`h-5 w-5 mx-auto mb-2 ${
-                        priority === option.value
+                        isSelected
                           ? 'text-primary'
-                          : option.value === 'rate'
+                          : option.key === 'rate'
                             ? 'text-red-500'
-                            : option.value === 'security'
+                            : option.key === 'security'
                               ? 'text-green-500'
-                              : 'text-purple-500'
+                              : option.key === 'noKyc'
+                                ? 'text-orange-500'
+                                : 'text-purple-500'
                       }`} />
                       <div className="font-medium text-sm">{option.label}</div>
                       <div className="text-xs text-muted-foreground mt-1">{option.desc}</div>

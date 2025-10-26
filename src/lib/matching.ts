@@ -5,11 +5,16 @@ export interface FormData {
   location: string;
   payout: 'fiat' | 'stablecoin' | 'either';
   speed: 'instant' | 'sameday' | 'fewdays' | 'noturgent';
-  priority: 'rate' | 'security' | 'simplicity';
+  priorities: {
+    rate: boolean;
+    security: boolean;
+    simplicity: boolean;
+    noKyc: boolean;
+  };
 }
 
 export function matchPlatforms(formData: FormData, allPlatforms: Platform[]): Platform[] {
-  const { loanAmount, location, payout, speed, priority } = formData;
+  const { loanAmount, location, payout, speed, priorities } = formData;
 
   // Hard filters - eliminate platforms that don't meet requirements
   let matches = allPlatforms.filter(platform => {
@@ -30,6 +35,9 @@ export function matchPlatforms(formData: FormData, allPlatforms: Platform[]): Pl
     if (speed === 'fewdays' && platform.fundingDays > 7) return false;
     // 'noturgent' accepts any speed
     
+    // KYC check - if no-KYC is a priority, filter out platforms requiring KYC
+    if (priorities.noKyc && platform.kyc) return false;
+    
     return true;
   });
 
@@ -37,31 +45,37 @@ export function matchPlatforms(formData: FormData, allPlatforms: Platform[]): Pl
   matches = matches.map(platform => {
     let score = platform.reputation; // Base score from 7.0-9.5
 
-    // Priority-based bonuses
-    if (priority === 'rate') {
+    // Priority-based bonuses - apply all selected priorities
+    if (priorities.rate) {
       // Reward low APR
       if (platform.aprMin < 5) score += 3;
       else if (platform.aprMin < 8) score += 2;
       else if (platform.aprMin < 10) score += 1;
     }
     
-    if (priority === 'security') {
+    if (priorities.security) {
       // Reward non-custodial or multi-sig
       if (platform.custody === 'Non-custodial') score += 3;
       else if (platform.custody.includes('Multi-sig')) score += 2;
     }
     
-    if (priority === 'simplicity') {
+    if (priorities.simplicity) {
       // Reward CeFi platforms (easier UX)
       if (platform.type === 'cefi') score += 2;
       // Reward no monthly payments
       if (!platform.monthlyPayments) score += 1;
     }
 
+    // No-KYC priority bonus
+    if (priorities.noKyc && !platform.kyc) {
+      score += 3; // Significant bonus for no-KYC platforms when it's a priority
+    } else if (!platform.kyc) {
+      score += 0.5; // Small bonus for no-KYC even when not a priority
+    }
+    
     // General feature bonuses
     if (!platform.monthlyPayments) score += 0.5;
     if (parseInt(platform.ltv) >= 70) score += 1;
-    if (!platform.kyc) score += 0.5;
     if (platform.fundingDays === 0) score += 0.5;
 
     return { ...platform, score };
