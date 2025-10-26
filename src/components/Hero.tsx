@@ -68,7 +68,7 @@ export function Hero() {
                       <div className="flex justify-center">
                         <div className="w-20 h-20 p-2 transition-all duration-300 hover:scale-105 cursor-pointer">
                           <img
-                            src={`/src/assets/logos/${logo}.svg`}
+                            src={`./assets/logos/${logo}.svg`}
                             alt={`${logo} logo`}
                             className="w-full h-full object-contain rounded-md overflow-hidden"
                           />
