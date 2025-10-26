@@ -5,7 +5,7 @@ import LendingComparison from './pages/LendingComparison';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.PROD ? '/check21' : '/'}>
       <div className="min-h-screen">
         <Navigation />
         
