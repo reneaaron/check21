@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import Home from './pages/Home';
 import LendingComparison from './pages/LendingComparison';
 
 function App() {
   return (
-    <BrowserRouter basename={import.meta.env.PROD ? '/check21' : '/'}>
+    <HashRouter>
       <div className="min-h-screen">
         <Navigation />
         
@@ -34,7 +34,7 @@ function App() {
           </div>
         </footer>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
