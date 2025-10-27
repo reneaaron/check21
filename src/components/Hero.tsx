@@ -1,8 +1,10 @@
 import { BarChart2, Shield, Zap, ArrowRight, Star, Users, Sparkles, Globe, Coins } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { Badge } from '@/components/ui/badge';
+import { useNavigate } from 'react-router-dom';
 
 export function Hero() {
+  const navigate = useNavigate();
 
   const logos = [
     'nexo', 'coinbase', 'binance', 'aave', 'compound', 'makerdao',
@@ -41,7 +43,7 @@ export function Hero() {
           {/* Enhanced CTA buttons */}
           <div className="flex justify-center">
             <button
-              onClick={() => window.location.href = '/lending'}
+              onClick={() => navigate('/lending')}
               className="group inline-flex items-center justify-center h-14 px-8 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
             >
               Find the Best Bitcoin-Backed Loans
@@ -120,7 +122,7 @@ export function Hero() {
                 </p>
                 <div className="pt-4">
                   <button
-                    onClick={() => window.location.href = '/lending'}
+                    onClick={() => navigate('/lending')}
                     className="inline-flex items-center justify-center h-12 px-8 rounded-xl bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg"
                   >
                     Get Started with Bitcoin Lending
